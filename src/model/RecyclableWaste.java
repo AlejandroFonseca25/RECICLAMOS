@@ -16,15 +16,15 @@ public class RecyclableWaste extends Waste
 	////////////////////////////////////////
 	//           Constructor              //
 	////////////////////////////////////////
-	public RecyclableWaste (String identifier, String name, int origin, String color, int decompositionTime, int type, String throwAwayDesc)
+	public RecyclableWaste (String identifier, String name, int origin, String color, int decompositionTime, ProducerProduct producerProduct, int type, String throwAwayDesc)
 	{
-		super (identifier, name, origin, color, decompositionTime);
+		super (identifier, name, origin, color, decompositionTime, producerProduct);
 		this.type = type;
 		this.throwAwayDesc = throwAwayDesc;
 	}
 
 	////////////////////////////////////////
-	//               Methods              //
+	//            Get Methods             //
 	////////////////////////////////////////
 	public int getType ()
 	{

@@ -10,14 +10,14 @@ public class InertWaste extends Waste
 	////////////////////////////////////////
 	//           Constructor              //
 	////////////////////////////////////////	
-	public InertWaste (String identifier, String name, int origin, String color, int decompositionTime, String useReduction)
+	public InertWaste (String identifier, String name, int origin, String color, int decompositionTime, ProducerProduct producerProduct, String useReduction)
 	{
-		super (identifier, name, origin, color, decompositionTime);
+		super (identifier, name, origin, color, decompositionTime, producerProduct);
 		this.useReduction = useReduction;
 	}
 
 	////////////////////////////////////////
-	//               Methods              //
+	//            Get Methods             //
 	////////////////////////////////////////
 	public String getUseReduction ()
 	{

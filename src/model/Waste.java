@@ -15,23 +15,23 @@ public abstract class Waste
 	private int origin;
 	private String color;
 	private int decompositionTime;
-	private ArrayList<ProducerProduct> producerProducts;
+	private ProducerProduct producerProduct;
 
 	////////////////////////////////////////
 	//            Constructor             //
 	////////////////////////////////////////
-	public Waste (String identifier, String name, int origin, String color, int decompositionTime)
+	public Waste (String identifier, String name, int origin, String color, int decompositionTime, ProducerProduct producerProduct)
 	{
 		this.identifier = identifier;
 		this.name = name;
 		this.origin = origin;
 		this.color = color;
 		this.decompositionTime = decompositionTime;
-		producerProducts = new ArrayList<ProducerProduct>();
+		this.producerProduct = producerProduct;
 	}
 
 	////////////////////////////////////////
-	//               Methods              //
+	//            Get methods             //
 	////////////////////////////////////////
 	public String getIdentifier ()
 	{
