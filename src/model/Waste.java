@@ -57,4 +57,9 @@ public abstract class Waste
 	{
 		return this.decompositionTime;
 	}	
+
+	public void setProducerProduct (ProducerProduct producerProduct)
+	{
+		this.producerProduct = producerProduct;
+	}
 }

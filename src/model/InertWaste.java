@@ -5,15 +5,15 @@ public class InertWaste extends Waste
 	////////////////////////////////////////
 	//            Attributes              //
 	////////////////////////////////////////	
-	private String useReduction;
+	private String reductionTips;
 
 	////////////////////////////////////////
 	//           Constructor              //
 	////////////////////////////////////////	
-	public InertWaste (String identifier, String name, int origin, String color, int decompositionTime, ProducerProduct producerProduct, String useReduction)
+	public InertWaste (String identifier, String name, int origin, String color, int decompositionTime, ProducerProduct producerProduct, String reductionTips)
 	{
 		super (identifier, name, origin, color, decompositionTime, producerProduct);
-		this.useReduction = useReduction;
+		this.reductionTips = reductionTips;
 	}
 
 	////////////////////////////////////////
@@ -21,6 +21,6 @@ public class InertWaste extends Waste
 	////////////////////////////////////////
 	public String getUseReduction ()
 	{
-		return this.useReduction;
+		return this.reductionTips;
 	}
 }
