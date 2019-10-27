@@ -398,12 +398,45 @@ public class Main
 
 	public void nocivityMenu ()
 	{
+		System.out.print("\n                     ****| Nocivity calculation |****                     ");
+		System.out.println("\nEnter the waste's name.");
+		String name = stringReader.nextLine();
 
+		if (reciclamos.wasteExists(name))
+		{
+			System.out.print("\nThe nocivity of " + name + " is: " + reciclamos.calculateNocivity(name) + ".");
+		}
+
+		else
+		{
+			System.out.println("\nXXXX| Waste doesn't exist |XXXX");
+		}
 	}
 
 	public void usabilityMenu ()
 	{
+		System.out.println("\n                     ####| Usability Determination |####                     ");
+		System.out.println("\nEnter the waste's name.");
 
+		String name = stringReader.nextLine();
+
+		if (reciclamos.wasteExists(name))
+		{
+			if (reciclamos.determineUsability(name))
+			{
+				System.out.println("\n~" + name + " is usable~");
+			}
+
+			else
+			{
+				System.out.println("\n~" + name + " is not usable~");
+			}
+		}
+
+		else
+		{
+			System.out.println("\nXXXX| Waste doesn't exist |XXXX");
+		}
 	}
 
 	public void askForProduct (String wasteIdentifier)
@@ -474,16 +507,25 @@ public class Main
 
 	public void init ()
 	{
-		reciclamos.addProduct("101", "Banana", "A fruit");
+		reciclamos.addProduct("101", "Avocado", "Delicious fruit");
 		reciclamos.addProduct("275", "CPU", "Machine with metal parts");
 		reciclamos.addProduct("765", "Chips", "Bag with chips inside");
-		reciclamos.addWaste("700", "Peel", 2, "Yellow", 7, true);
-		reciclamos.addWaste("500", "Graphic's card", 2, "Gray", 10000, "Don't buy new computers");
-		reciclamos.addWaste("499", "Processor", 2, "Black", 10000, "Don't buy new computers");
-		reciclamos.addWaste("999", "Bag of chips", 2, "Varied", 30000, 4, "Stop eating chips");
+		reciclamos.addProduct("888", "Animal", "Any mammal");
+		reciclamos.addWaste("712", "Bone", 2, "White", 14, false);
+		reciclamos.addWaste("656", "Innards", 1, "Red", 4, false);
+		reciclamos.addWaste("444", "Feces", 1, "Brown", 8, true);
+		reciclamos.addWaste("700", "Avocado's peel", 2, "Green", 7, true);
+		reciclamos.addWaste("696", "Avocado's seed", 2, "Brown", 5, false);
+		reciclamos.addWaste("500", "Graphic's card", 2, "Gray", 90000, "Don't buy new computers");
+		reciclamos.addWaste("499", "Processor", 2, "Black", 100000, "Don't buy new computers");
+		reciclamos.addWaste("999", "Bag of chips", 2, "Varied", 30000, 4, "Don't throw the bag at natural spaces, classify your trash");
 		reciclamos.assignProduct("700", "101");
+		reciclamos.assignProduct("696", "101");
 		reciclamos.assignProduct("500", "275");
 		reciclamos.assignProduct("499", "275");
 		reciclamos.assignProduct("999", "765");
+		reciclamos.assignProduct("712", "888");
+		reciclamos.assignProduct("656", "888");
+		reciclamos.assignProduct("444", "888");
 	}
 }

@@ -30,6 +30,38 @@ public abstract class Waste
 		this.producerProduct = producerProduct;
 	}
 
+	public double calculateNocivity ()
+	{
+		double nocivity = 0; 
+
+		switch (origin)
+		{
+			case 1:
+			nocivity = decompositionTime * 0.10;
+			break;
+
+			case 2:
+			nocivity = decompositionTime * 0.05;
+			break;
+
+			case 3:
+			nocivity = decompositionTime * 0.12;
+			break;
+
+			case 4:
+			nocivity = decompositionTime * 0.08;
+			break;
+
+			case 5:
+			nocivity = decompositionTime * 0.15; 
+			break;
+		}
+
+		return nocivity;
+	}
+
+	public abstract boolean determineUsability ();
+
 	////////////////////////////////////////
 	//            Get methods             //
 	////////////////////////////////////////

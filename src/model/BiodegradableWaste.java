@@ -34,6 +34,38 @@ public class BiodegradableWaste extends Waste
 		return information;
 	}
 
+	@Override
+	public double calculateNocivity ()
+	{
+		double nocivity = 0;
+
+		if (canCompost == true)
+		{
+			nocivity = super.calculateNocivity() - (getDecompositionTime() * 0.01);
+		}
+
+		else
+		{
+			nocivity = super.calculateNocivity();
+		}
+
+		return nocivity;
+	}
+
+	@Override
+	public boolean determineUsability ()
+	{
+		if (getDecompositionTime() < 365 && canCompost)
+		{
+			return true;
+		}
+
+		else 
+		{
+			return false;
+		}
+	}
+
 	////////////////////////////////////////
 	//            Get Methods             //
 	////////////////////////////////////////

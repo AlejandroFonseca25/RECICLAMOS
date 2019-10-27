@@ -1,7 +1,8 @@
 package model;
 
 import java.util.ArrayList;
-public class Reciclamos
+
+public class Reciclamos 
 {
 	//////////////////////////////////////////////
 	//                 Attributes               //
@@ -101,7 +102,7 @@ public class Reciclamos
 			}
 		}
 
-		information = waste.toString() + "\n\n" + "~Product information: \n" + printProductInfo(waste.getProducerProduct().getIdentifier());
+		information = waste.toString() + "\n\n" + "~Product information~ \n" + printProductInfo(waste.getProducerProduct().getIdentifier());
 
 		return information;
 	}
@@ -183,6 +184,7 @@ public class Reciclamos
 	{
 		String wastesForPrint = "";
 		int counter = 0;
+		double comparator = 0;
 
 		for (int i=0;i < products.size();i++)
 		{
@@ -193,16 +195,31 @@ public class Reciclamos
 		}
 
 		wastesForPrint += "\n\n~Wastes~\n";
+		
+		Waste temp = null;
 
 		for (int i=0;i < wastes.size();i++)
 		{
+			for (int j=0;j < wastes.size() - i - 1;j++)
+			{
+				if (wastes.get(j).calculateNocivity() < wastes.get(j+1).calculateNocivity())
+				{
+					temp = wastes.get(j);
+					wastes.set(j, wastes.get(j+1));
+					wastes.set(j+1,temp);
+				}
+			}
+		}
+		
+		for (int i=0;i < wastes.size();i++)
+		{	
 			if (identifier.equals(wastes.get(i).getProducerProduct().getIdentifier()))
 			{
 				++counter;
-				wastesForPrint += "\n" + counter + ".\n" + wastes.get(i).toString() + "\n";
+				wastesForPrint += "\n" + counter + ".\n" + wastes.get(i).toString() + "\nNocivity: " + wastes.get(i).calculateNocivity() + "\n";
 			}
 		}
-
+		
 		if (counter == 0)
 		{
 			wastesForPrint += "\nThis product doesn't have wastes assigned yet.";
@@ -211,6 +228,39 @@ public class Reciclamos
 		return wastesForPrint;
 	}
 
+	public double calculateNocivity (String name)
+	{
+		double nocivity = 0;
+		boolean found = false;
+
+		for (int i=0; i < wastes.size() && !found;i++)
+		{
+			if (name.equalsIgnoreCase(wastes.get(i).getName()))
+			{
+				nocivity = wastes.get(i).calculateNocivity();
+				found = true;
+			}
+		}
+
+		return nocivity;
+	}
+
+	public boolean determineUsability (String name)
+	{
+		boolean found = false;
+		boolean usability = true;
+
+		for (int i=0; i < wastes.size() && !found;i++)
+		{
+			if (name.equalsIgnoreCase(wastes.get(i).getName()))
+			{
+				usability = wastes.get(i).determineUsability();
+				found = true;
+			}
+		}
+
+		return usability;
+	}
 	/////////////////////////////////////////////////////////////////////////////////////
 	//                                 Validator methods                               //
 	/////////////////////////////////////////////////////////////////////////////////////

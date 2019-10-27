@@ -80,7 +80,7 @@ public class RecyclableWaste extends Waste
 
 		if (throwAwayDesc.equals(""))
 		{
-			newThrowAwayDesc = "No Description.";
+			newThrowAwayDesc = "No Description";
 		}
 
 		else
@@ -89,6 +89,30 @@ public class RecyclableWaste extends Waste
 		}
 
 		return newThrowAwayDesc;
+	}
+
+	@Override
+	public double calculateNocivity ()
+	{
+		double nocivity = 0;
+
+		nocivity = super.calculateNocivity() - (getDecompositionTime() * 0.02);
+
+		return nocivity;
+	}
+
+	@Override
+	public boolean determineUsability ()
+	{
+		if (throwAwayDesc != "")
+		{
+			return true;
+		}
+
+		else 
+		{
+			return false;
+		}
 	}
 
 	////////////////////////////////////////

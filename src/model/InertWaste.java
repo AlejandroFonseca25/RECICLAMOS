@@ -22,6 +22,12 @@ public class InertWaste extends Waste
 		String information = super.toString() + "\nTips for usage reduction: " + reductionTips + ".";
 		return information;
 	}
+
+	@Override
+	public boolean determineUsability ()
+	{
+		return false;
+	}
 	////////////////////////////////////////
 	//            Get Methods             //
 	////////////////////////////////////////
