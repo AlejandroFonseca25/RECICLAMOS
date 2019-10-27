@@ -61,7 +61,7 @@ public class Reciclamos
 		Waste waste = null;
 		boolean done = false;
 
-		for (int i = 0; i < products.size() && done == true;i++)
+		for (int i = 0; i < products.size() && done == false;i++)
 		{
 			if (productIdentifier.equals(products.get(i).getIdentifier()))
 			{
@@ -72,12 +72,16 @@ public class Reciclamos
 
 		done = false;
 
-		for (int i = 0; i < wastes.size() && done == true;i++)
+		for (int i = 0; i < wastes.size() && done == false;i++)
 		{
 			if (wasteIdentifier.equals(wastes.get(i).getIdentifier()))
 			{
-				wastes.get(i).setProducerProduct(product);
+				waste = wastes.get(i);
 
+				waste.setProducerProduct(product);
+
+				wastes.set(i,waste);
+				done = true;
 			}
 		}
 	}
@@ -85,8 +89,126 @@ public class Reciclamos
 	public String printWasteInfo (String keyword)
 	{
 		String information = "";
+		Waste waste = null;
+		boolean found = false;
+
+		for (int i = 0;i < wastes.size() && found == false;i++)
+		{
+			if (keyword.equalsIgnoreCase(wastes.get(i).getName()))
+			{
+				waste = wastes.get(i);
+				found = true;
+			}
+		}
+
+		information = waste.toString() + "\n\n" + "~Product information: \n" + printProductInfo(waste.getProducerProduct().getIdentifier());
+
+		return information;
+	}
+
+	public String printProductInfo (String keyword)
+	{
+		String information = "";
+		ProducerProduct product = null;
+		boolean found = false;
+
+		for (int i = 0;i < products.size() && found == false;i++)
+		{
+			if (keyword.equals(products.get(i).getIdentifier()))
+			{
+				product = products.get(i);
+				found = true;
+			}
+		}
+
+		information = product.toString();
+
+		return information;
+	}
+
+	public String printProducts ()
+	{
+		String allProducts = "";
 		
-		return information; 
+		for (int i=0; i < products.size();i++)
+		{
+			allProducts += "\n~Product #" + (i+1) + "~ " + products.get(i).toString() + "\n";
+		}
+
+		return allProducts;
+	}
+
+	public String printWastes ()
+	{
+		int counter = 0;
+		String allWastes = "\n$$$$| Biodegradables |$$$$\n";
+		
+		for (int i=0; i < wastes.size();i++)
+		{
+			if (wastes.get(i) instanceof BiodegradableWaste)
+			{
+				++counter;
+				allWastes += "\n" + counter + ".\n" + wastes.get(i).toString() + "\n\n~Product information~ \n" + printProductInfo(wastes.get(i).getProducerProduct().getIdentifier()) + "\n";
+			}
+		}
+
+		counter = 0;
+		allWastes += "\n$$$$| Recyclables |$$$$\n";
+
+		for (int i=0;i < wastes.size();i++)
+		{
+			if (wastes.get(i) instanceof RecyclableWaste)
+			{
+				++counter;
+				allWastes += "\n" + counter + ".\n" + wastes.get(i).toString() + "\n\n~Product information~ \n" + printProductInfo(wastes.get(i).getProducerProduct().getIdentifier()) + "\n";
+			} 
+		}
+
+		counter = 0;
+		allWastes += "\n$$$$| Inerts |$$$$\n";
+
+		for (int i=0;i < wastes.size();i++)
+		{
+			if (wastes.get(i) instanceof InertWaste)
+			{
+				++counter;
+				allWastes += "\n" + counter + ".\n" + wastes.get(i).toString() + "\n\n~Product information~ \n" + printProductInfo(wastes.get(i).getProducerProduct().getIdentifier()) + "\n";
+			}
+		}
+
+		return allWastes;
+	}
+
+	public String printWastesOfAProduct (String identifier)
+	{
+		String wastesForPrint = "";
+		int counter = 0;
+
+		for (int i=0;i < products.size();i++)
+		{
+			if (identifier.equals(products.get(i).getIdentifier()))
+			{
+				wastesForPrint += "\n~Product information~ \n" + printProductInfo(products.get(i).getIdentifier());
+			}
+		}
+
+		wastesForPrint += "\n\n~Wastes~\n";
+
+		for (int i=0;i < wastes.size();i++)
+		{
+			if (identifier.equals(wastes.get(i).getProducerProduct().getIdentifier()))
+			{
+				++counter;
+				wastesForPrint += "\n" + counter + ".\n" + wastes.get(i).toString() + "\n";
+			}
+		}
+
+		if (counter == 0)
+		{
+			wastesForPrint += "\nThis product doesn't have wastes assigned yet.";
+		}
+
+		return wastesForPrint;
 	}
 
 	/////////////////////////////////////////////////////////////////////////////////////
@@ -161,7 +283,7 @@ public class Reciclamos
 			return false;
 		}
 
-		else if (name.matches("^[A-Za-z]*$") == true) 
+		else if (name.matches("^[A-Z a-z]*$")) 
 		{
 			boolean found = false;
 			
@@ -197,12 +319,12 @@ public class Reciclamos
 
 	public boolean productNameValidator (String name)
 	{
-		if (name.contains("[0-9]+") == true)
+		if (name.equals(""))
 		{
 			return false;
 		}
 
-		else 
+		else if (name.matches("^[A-Z a-z]*$")) 
 		{
 			boolean found = false;
 			
@@ -223,6 +345,16 @@ public class Reciclamos
 			{
 				return true;
 			}
+		}
+
+		else if (name.contains("[0-9]+") == false && name.contains(" ") == true)
+		{
+			return true;
+		}
+
+		else
+		{
+			return false;
 		}
 	}
 
@@ -270,9 +402,9 @@ public class Reciclamos
 		}
 	}
 
-	public boolean wasteExists (String keyword)
+	public boolean wasteExists (String name)
 	{
-		if (keyword.equals(""))
+		if (name.equals(""))
 		{
 			return false;
 		}
@@ -283,12 +415,7 @@ public class Reciclamos
 
 			for (int i = 0;i < wastes.size() && found == false;i++)
 			{
-				if (keyword.equalsIgnoreCase(wastes.get(i).getName()))
-				{
-					found = true;
-				}
-
-				else if (keyword.equalsIgnoreCase(wastes.get(i).getIdentifier()))
+				if (name.equalsIgnoreCase(wastes.get(i).getName()))
 				{
 					found = true;
 				}

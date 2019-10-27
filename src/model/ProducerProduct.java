@@ -19,6 +19,12 @@ public class ProducerProduct
 		this.description = description;
 	}
 
+	public String toString ()
+	{
+		String toString = "\nName: " + name + ".\nIdentifier: " + identifier + ".\nDescription: " + description + ".";
+		return toString;
+	}
+
 	////////////////////////////////////////
 	//             Get Methods            //
 	////////////////////////////////////////

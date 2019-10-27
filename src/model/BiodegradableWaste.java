@@ -16,6 +16,24 @@ public class BiodegradableWaste extends Waste
 		this.canCompost = canCompost;
 	}
 
+	@Override
+	public String toString ()
+	{
+		String compostability;
+
+		if (canCompost == false)
+		{
+			compostability = "Not compostable.";
+		}
+
+		else
+		{
+			compostability = "Compostable.";
+		}
+		String information = super.toString() + "\nCompostability: " + compostability;
+		return information;
+	}
+
 	////////////////////////////////////////
 	//            Get Methods             //
 	////////////////////////////////////////

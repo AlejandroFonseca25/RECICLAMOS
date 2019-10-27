@@ -8,7 +8,8 @@ public class Main
 	////////////////////////////////////////
 	//            Attributes              //
 	////////////////////////////////////////
-	private Scanner reader;
+	private Scanner stringReader;
+	private Scanner intReader;
 	private Reciclamos reciclamos;
 
 	////////////////////////////////////////
@@ -16,7 +17,8 @@ public class Main
 	////////////////////////////////////////
 	public Main ()
 	{
-		reader = new Scanner(System.in);
+		stringReader = new Scanner(System.in);
+		intReader = new Scanner(System.in);
 		reciclamos = new Reciclamos();
 	}
 
@@ -31,6 +33,8 @@ public class Main
 	////////////////////////////////////////
 	public void mainMenu ()
 	{
+		init();
+
 		int decision = 0;
 		boolean on = true;
 
@@ -42,7 +46,7 @@ public class Main
 			System.out.println("1 = Add waste.\n2 = Add waste producer product.\n3 = Display waste information.\n4 = Lists menu.\n5 = Calculate a waste's nocivity for the earth.\n6 = Determine a waste's usability.\n7 = Exit.");
 			System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n");
 
-			decision = reader.nextInt();
+			decision = intReader.nextInt();
 
 			switch (decision)
 			{
@@ -90,7 +94,7 @@ public class Main
 
 				default:
 				{
-					System.out.println("\nxxxx| Wrong number! |xxxx\n");
+					System.out.println("\n!!!!| Wrong number! |!!!!\n");
 				}
 			}
 		}
@@ -110,7 +114,7 @@ public class Main
 		
 		System.out.println("Select the waste's category.\n1 = Biodegradable.\n2 = Recyclable.\n3 = Inert.");
 
-		path = reader.nextInt();
+		path = intReader.nextInt();
 
 		if (path > 3 || path < 1)
 		{
@@ -120,9 +124,8 @@ public class Main
 		if (ok)
 		{
 			System.out.println("\nEnter the waste's identifier number (only numbers, cannot repeat).");
-			reader.nextLine();
-			
-			String identifier = reader.nextLine();
+						
+			String identifier = stringReader.nextLine();
 
 			ok = reciclamos.identifierValidator(identifier);
 
@@ -130,7 +133,7 @@ public class Main
 			{
 				System.out.println("\nEnter the waste's name (no numbers, cannot repeat).");
 
-				String name = reader.nextLine();
+				String name = stringReader.nextLine();
 
 				ok = reciclamos.nameValidator(name);
 
@@ -138,7 +141,7 @@ public class Main
 				{
 					System.out.println("\nEnter the waste's origin.\n1 = Industrial.\n2 = Domiciliary.\n3 = Municipal.\n4 = Construction.\n5 = Hospitalary.");
 
-					int origin = reader.nextInt();
+					int origin = intReader.nextInt();
 
 					if (origin > 5 || origin < 1)
 					{
@@ -148,9 +151,8 @@ public class Main
 					if (ok)
 					{
 						System.out.println("\nEnter the waste's color (no numbers).");
-						reader.nextLine();
 
-						String color = reader.nextLine();
+						String color = stringReader.nextLine();
 
 						ok = reciclamos.colorValidator (color);
 
@@ -158,7 +160,7 @@ public class Main
 						{
 							System.out.println("\nEnter the waste's time of decomposition (in days).");
 							
-							int decompositionTime = reader.nextInt();
+							int decompositionTime = intReader.nextInt();
 
 							if (decompositionTime < 1)
 							{
@@ -173,7 +175,7 @@ public class Main
 									{
 										System.out.println("\nIs the waste compostable?\n1 = Yes.\n2 = No.");
 
-										int hi = reader.nextInt();
+										int hi = intReader.nextInt();
 
 										if (hi == 1)
 										{
@@ -201,7 +203,7 @@ public class Main
 									{
 										System.out.println("\nEnter the waste's type.\n1 = Paper.\n2 = Cardboard.\n3 = Glass.\n4 = Plastic.\n5 = Metal.");
 
-										type = reader.nextInt();
+										type = intReader.nextInt();
 
 										if (type < 1 || type > 5)
 										{
@@ -213,9 +215,8 @@ public class Main
 											if (origin == 1 || origin == 2)
 											{
 												System.out.println("\nEnter a brief description of how to correctly dispose this waste.");
-					 							reader.nextLine();
 
-												throwAwayDesc = reader.nextLine();
+												throwAwayDesc = stringReader.nextLine();
 											}
 
 											reciclamos.addWaste(identifier, name, origin, color, decompositionTime, type, throwAwayDesc);
@@ -226,9 +227,8 @@ public class Main
 									case 3:
 									{
 										System.out.println("\nEnter tips to reduce the usage of this waste.");
-										reader.nextLine();
 
-										reductionTips = reader.nextLine();
+										reductionTips = stringReader.nextLine();
 
 										reciclamos.addWaste(identifier, name, origin, color, decompositionTime, reductionTips);
 										break;
@@ -250,7 +250,6 @@ public class Main
 				}
 			}
 		}
-
 		if (version != 2)
 		{
 			if (ok)
@@ -258,7 +257,7 @@ public class Main
 				System.out.println("\n++++| The waste was successfully added. |++++");
 			}
 
-			else if (!ok)
+			else 
 			{
 				System.out.println("\n!!!!| Something went wrong. |!!!!");
 			}
@@ -268,87 +267,133 @@ public class Main
 	public void addProductMenu (int version, String wasteIdentifier) // wasteIdentifier can be empty
 	{
 		boolean ok = false;
+		boolean done = false;
 
-		System.out.println("\nEnter the product's identifier number (Only numbers, cannot repeat).");
-		reader.nextLine();
-		String identifier = reader.nextLine();
-
-		ok = reciclamos.productIdentifierValidator(identifier);
-
-		if (ok)
+		System.out.println("                     ++++| Product adding procedure |++++                     ");
+		
+		while (done == false)
 		{
-			System.out.println("\nEnter the product's name (No numbers, cannot repeat).");
+			System.out.println("\nEnter the product's identifier number (Only numbers, cannot repeat).");
 
-			String name = reader.nextLine();
+			String identifier = stringReader.nextLine();
 
-			ok = reciclamos.productNameValidator(name);
+			ok = reciclamos.productIdentifierValidator(identifier);
 
 			if (ok)
 			{
-				System.out.println("\nEnter a brief description of the product.");
+				System.out.println("\nEnter the product's name (No numbers, cannot repeat).");
 
-				String description = reader.nextLine();
+				String name = stringReader.nextLine();
 
-				reciclamos.addProduct(identifier, name, description);
+				ok = reciclamos.productNameValidator(name);
 
-				if (version == 0)
+				if (ok)
 				{
-					askForWaste (identifier);
+					System.out.println("\nEnter a brief description of the product.");
+
+					String description = stringReader.nextLine();
+
+					reciclamos.addProduct(identifier, name, description);
+					done = true;
+
+					if (version == 0)
+					{
+						askForWaste (identifier);
+					}
+
+					else if (version == 1)
+					{
+						reciclamos.assignProduct(wasteIdentifier, identifier);
+					}
+				}
+			}
+		
+
+			if (version == 0)
+			{
+				if (ok)
+				{
+					System.out.println("\n++++| The product was successfully added. |++++");
 				}
 
-				else if (version == 1)
+				else if (!ok)
 				{
-					reciclamos.assignProduct(wasteIdentifier, identifier);
+					System.out.println("\n!!!!| Something went wrong. |!!!!");
 				}
 			}
-		}
 
-		if (version == 0)
-		{
-			if (ok)
+			else if (version == 1)
 			{
-				System.out.println("\n++++| The product was successfully added. |++++");
-			}
+				if (ok)
+				{
+					System.out.println("\n++++| The waste was successfully added. |++++");
+				}
 
-			else if (!ok)
-			{
-				System.out.println("\n!!!!| Something went wrong. |!!!!");
-			}
-		}
-
-		else if (version == 1)
-		{
-			if (ok)
-			{
-				System.out.println("\n++++| The waste was successfully added. |++++");
-			}
-
-			else if (!ok)
-			{
-				System.out.println("\n !!!!| Something went wrong. |!!!!");
+				else if (!ok)
+				{
+					System.out.println("\n !!!!| Something went wrong. |!!!!");
+				}
 			}
 		}
 	}
 
 	public void wasteInformationMenu ()
 	{
-		boolean ok = false;
+		System.out.println("                     dddd| Waste info display |bbbb                     ");
+		System.out.println("\nEnter the waste's name.");
 
-		System.out.println("\nEnter the identifier waste's identifier number or name.");
+		String name = stringReader.nextLine();
 
-		String keyword = reader.nextLine();
-
-		ok = reciclamos.wasteExists(keyword);
-
-		if (ok)
+		if (reciclamos.wasteExists(name))
 		{
-			reciclamos.printWasteInfo(keyword);
+			System.out.println("\n                     dddd| Waste information |bbbb                     ");
+			System.out.println("\n" + reciclamos.printWasteInfo(name));
+		}
+
+		else
+		{
+			System.out.println("\nXXXX| Waste doesn't exist! |XXXX");
 		}
 	}
 
 	public void listMenu ()
 	{
+		int decision = 0;
 
+		System.out.println("\nWhat list you want to see?");
+		System.out.println("\n1 = All wastes list.\n2 = All products list.\n3 = All wastes of a product.");
+
+		decision = intReader.nextInt();
+
+		if (decision == 1)
+		{
+			System.out.println("\n                     {{{{| Wastes list |}}}}                     ");
+			System.out.print(reciclamos.printWastes());
+		}
+
+		else if (decision == 2)
+		{
+			System.out.println("\n                     [[[[| Products list |]]]]                     ");
+			System.out.println(reciclamos.printProducts());
+		}
+
+		else if (decision == 3)
+		{
+			System.out.println("\nEnter the product's identifier number.");
+
+			String identifier = stringReader.nextLine();
+
+			if (reciclamos.productExists(identifier))
+			{
+			System.out.println("\n                     <<<<| Wastes of product #" + identifier + " |>>>>                     ");			
+			System.out.println(reciclamos.printWastesOfAProduct(identifier));
+			}
+
+			else
+			{
+				System.out.println("\nXXXX| Product doesn't exist! |XXXX");
+			}
+		}
 	}
 
 	public void nocivityMenu ()
@@ -366,14 +411,13 @@ public class Main
 		System.out.println("\nSelect one option for the producer product:");
 		System.out.println("\n1 = Add an already existent product.\n2 = Create a new product.");
 
-		int decision = reader.nextInt();
+		int decision = intReader.nextInt();
 
 		if (decision == 1)
 		{
 			System.out.println("\nEnter the product's identifier number.");
-			reader.nextLine();
 
-			String productIdentifier = reader.nextLine();
+			String productIdentifier = stringReader.nextLine();
 
 			boolean exists = reciclamos.productExists(productIdentifier);
 
@@ -408,7 +452,7 @@ public class Main
 				System.out.println("\nDo you want to add another one?\n1 = Yes.\n2 = No.");
 			}
 
-			decision = reader.nextInt();
+			decision = intReader.nextInt();
 
 			if (decision == 1)
 			{
@@ -423,13 +467,23 @@ public class Main
 
 			else
 			{
-				System.out.println("\nxxxx| Incorrect number. |xxxx");
+				System.out.println("\nXXXX| Wrong number! |XXXX");
 			}
 		}
 	}
 
 	public void init ()
 	{
-		
+		reciclamos.addProduct("101", "Banana", "A fruit");
+		reciclamos.addProduct("275", "CPU", "Machine with metal parts");
+		reciclamos.addProduct("765", "Chips", "Bag with chips inside");
+		reciclamos.addWaste("700", "Peel", 2, "Yellow", 7, true);
+		reciclamos.addWaste("500", "Graphic's card", 2, "Gray", 10000, "Don't buy new computers");
+		reciclamos.addWaste("499", "Processor", 2, "Black", 10000, "Don't buy new computers");
+		reciclamos.addWaste("999", "Bag of chips", 2, "Varied", 30000, 4, "Stop eating chips");
+		reciclamos.assignProduct("700", "101");
+		reciclamos.assignProduct("500", "275");
+		reciclamos.assignProduct("499", "275");
+		reciclamos.assignProduct("999", "765");
 	}
 }

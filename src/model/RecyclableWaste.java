@@ -23,6 +23,74 @@ public class RecyclableWaste extends Waste
 		this.throwAwayDesc = throwAwayDesc;
 	}
 
+	@Override
+	public String toString ()
+	{
+		String information = super.toString() + "\nType: " + typeIntToString() + "\nDescription for correct disposure: " + throwAwayDescForToString() + ".";
+		return information;
+	}
+
+	public String typeIntToString ()
+	{
+		String typeString;
+
+		switch (this.type)
+		{
+			case 1:
+			{
+				typeString = "Paper.";
+				break;
+			}
+
+			case 2:
+			{
+				typeString = "Cardboard.";
+				break;
+			}
+
+			case 3:
+			{
+				typeString = "Glass.";
+				break;
+			}
+
+			case 4:
+			{
+				typeString = "Plastic.";
+				break;
+			}
+
+			case 5:
+			{
+				typeString = "Metal.";
+				break;
+			}
+
+			default:
+			{
+				typeString = "";
+			}
+		}
+		return typeString;
+	}
+
+	public String throwAwayDescForToString ()
+	{
+		String newThrowAwayDesc = "";
+
+		if (throwAwayDesc.equals(""))
+		{
+			newThrowAwayDesc = "No Description.";
+		}
+
+		else
+		{
+			newThrowAwayDesc = throwAwayDesc;
+		}
+
+		return newThrowAwayDesc;
+	}
+
 	////////////////////////////////////////
 	//            Get Methods             //
 	////////////////////////////////////////

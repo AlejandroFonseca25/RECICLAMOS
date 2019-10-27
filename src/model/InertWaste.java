@@ -16,6 +16,12 @@ public class InertWaste extends Waste
 		this.reductionTips = reductionTips;
 	}
 
+	@Override
+	public String toString ()
+	{
+		String information = super.toString() + "\nTips for usage reduction: " + reductionTips + ".";
+		return information;
+	}
 	////////////////////////////////////////
 	//            Get Methods             //
 	////////////////////////////////////////

@@ -8,8 +8,8 @@ public abstract class Waste
 	public final static int INDUSTRIAL = 1;
 	public final static int DOMICILIARY = 2;
 	public final static int MUNICIPAL = 3;
-	public final static int CONSTRUCTION = 4;
-	public final static int HOSPITALARY = 5;	
+	public final static int CONSTRUCTION = 4; 
+	public final static int HOSPITALARY = 5;
 	private String identifier;
 	private String name;
 	private int origin;
@@ -58,8 +58,64 @@ public abstract class Waste
 		return this.decompositionTime;
 	}	
 
+	public ProducerProduct getProducerProduct ()
+	{
+		return this.producerProduct;
+	}
+
 	public void setProducerProduct (ProducerProduct producerProduct)
 	{
 		this.producerProduct = producerProduct;
+	}
+
+	public String toString ()
+	{
+		String toString = "Name: " + name + "." + "\nIdentifier: " + identifier + ".\nOrigin: " + originIntToString() + "\nColor: " + color + ".\nDecomposition time: " + decompositionTime + " days.";
+		return toString;
+	}
+
+	public String originIntToString ()
+	{
+		String originString;
+
+		switch (this.origin)
+		{
+			case 1:
+			{
+				originString = "Industrial.";
+				break;
+			}
+
+			case 2:
+			{
+				originString = "Domiciliary.";
+				break;
+			}
+
+			case 3:
+			{
+				originString = "Municipal.";
+				break;
+			}
+
+			case 4:
+			{
+				originString = "Construction.";
+				break;
+			}
+
+			case 5:
+			{
+				originString = "Hospitalary.";
+				break;
+			}
+
+			default:
+			{
+				originString = "";
+			}
+		}
+
+		return originString;
 	}
 }
