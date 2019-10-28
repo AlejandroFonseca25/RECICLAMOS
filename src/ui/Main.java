@@ -31,6 +31,9 @@ public class Main
 	////////////////////////////////////////
 	//                Menus               //
 	////////////////////////////////////////
+	/**Prints the functions the program offers, from which the user can pick entering a number.<br>
+	*<b>Post:</b>The functions are printed, and the user either is taken to another menu, or receives a message indicating he entered a wrong number.<br> 
+	*/
 	public void mainMenu ()
 	{
 		init();
@@ -100,6 +103,12 @@ public class Main
 		}
 	}
 
+	/**Prints the indications for creating a waste and reads all the attributes of a waste, given by the user.<br>
+	*<b>Post:</b>A message showing the successfulness of the process of creation, or one notyifing that an error occurred.<br>
+	*@param version Integer number. Decides if certain instructions are going to be followed. 0 for a procedure of waste then product, 1
+	*for when it comes from a procedure of product then wastes.<br>
+	*@param productIdentifier String with a product's identifier number. Used when version is 1.<br>
+	*/
 	public void addWasteMenu (int version, String productIdentifier)
 	{
 		boolean ok = true;
@@ -264,6 +273,12 @@ public class Main
 		}
 	}
 
+	/**Prints the indications for creating a product and reads all the attributes of a product, given by the user.<br>
+	*<b>Post:</b> A message showing the successfulness of the process of creation, or one notyifing that an error occurred.<br>
+	*@param version Integer number. Decides if certain instructions are going to be followed. 0 for a procedure of product then wastes, 1
+	*for when it comes from a procedure of waste then product.<br>
+	*@param wasteIdentifier String with a waste's identifier number. Used when version is 1.<br>
+	*/
 	public void addProductMenu (int version, String wasteIdentifier) // wasteIdentifier can be empty
 	{
 		boolean ok = false;
@@ -337,6 +352,9 @@ public class Main
 		}
 	}
 
+	/**Reads a waste's name then show that waste's complete information, product included.<br>
+	<b>Post:</b>Prints the information of a waste or a message notyifing the non-existence of said waste.<br>
+	*/
 	public void wasteInformationMenu ()
 	{
 		System.out.println("                     dddd| Waste info display |bbbb                     ");
@@ -356,6 +374,10 @@ public class Main
 		}
 	}
 
+	/**Prints the 3 different options of lists. If it's the "Wastes of a product" option, it reads the desired product's identifier number.<br>
+	*<b>Post:</b> All the wastes, products, or wastes of a product are printed, or a message notifying the non-existence of said product
+	*is printed if in "Wastes of a product" option.<br>
+	*/
 	public void listMenu ()
 	{
 		int decision = 0;
@@ -396,6 +418,9 @@ public class Main
 		}
 	}
 
+	/**Reads a waste's name, then prints the nocivity of that waste.<br>
+	*<b>Post:</b>A message with either the nocivity of the waste or notifying the non-existence of said waste is printed.<br>
+	*/
 	public void nocivityMenu ()
 	{
 		System.out.print("\n                     ****| Nocivity calculation |****                     ");
@@ -413,6 +438,9 @@ public class Main
 		}
 	}
 
+	/**Reads a waste's name, then prints wether the waste is usable or not.<br>
+	*<b>Post:</b>The usability or not usability of the waste is printed, or a message notifying the non-existence of a product.<br>
+	*/
 	public void usabilityMenu ()
 	{
 		System.out.println("\n                     ####| Usability Determination |####                     ");
@@ -439,6 +467,10 @@ public class Main
 		}
 	}
 
+	/**Reads wether the user wants to add an already existent product, or if he wants to create a new one.<br>
+	<b>Post:</b>A product is added to a waste.<br>
+	@param wasteIdentifier The identifier number of the waste that's being created.<br>
+	*/
 	public void askForProduct (String wasteIdentifier)
 	{
 		System.out.println("\nSelect one option for the producer product:");
@@ -467,6 +499,10 @@ public class Main
 		}
 	}
 
+	/**Reads if the user wants to create waste for a product or not.<br>
+	<b>Post:</b>A waste or wastes are added to a product or not.<br>
+	@param productIdentifier The identifier number of the product previously created.<br>
+	*/
 	public void askForWaste (String productIdentifier)
 	{
 		boolean keepGoing = true;
@@ -477,12 +513,12 @@ public class Main
 		{
 			if (count == 0)
 			{
-				System.out.println("\nDo you want to add wastes produced by the product?\n1 = Yes.\n2 = No.");
+				System.out.println("\nDo you want to create wastes produced by the product?\n1 = Yes.\n2 = No.");
 			}
 
 			else 
 			{
-				System.out.println("\nDo you want to add another one?\n1 = Yes.\n2 = No.");
+				System.out.println("\nDo you want to create another one?\n1 = Yes.\n2 = No.");
 			}
 
 			decision = intReader.nextInt();
@@ -505,6 +541,9 @@ public class Main
 		}
 	}
 
+	/**Initializes products and wastes.<br>
+	<b>Post:</b>Some products and wastes are initialized in the program.<br>
+	*/
 	public void init ()
 	{
 		reciclamos.addProduct("101", "Avocado", "Delicious fruit");

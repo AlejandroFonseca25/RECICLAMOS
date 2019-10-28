@@ -16,6 +16,10 @@ public class InertWaste extends Waste
 		this.reductionTips = reductionTips;
 	}
 
+	/**Stores the information of the waste in a message.<br>
+	<b>Post:</b>The information of the waste was stored in a message.<br>
+	@return Message with the information of the waste.<br>
+	*/
 	@Override
 	public String toString ()
 	{
@@ -23,6 +27,10 @@ public class InertWaste extends Waste
 		return information;
 	}
 
+	/**Sets the usability of the waste as false.<br>
+	*<b>Post:</b>The usability of the waste is determined as false.<br>
+	*@return Boolean determining the waste's usability as false.<br>
+	*/
 	@Override
 	public boolean determineUsability ()
 	{

@@ -23,6 +23,10 @@ public class RecyclableWaste extends Waste
 		this.throwAwayDesc = throwAwayDesc;
 	}
 
+	/**Stores the information of the waste in a message.<br>
+	<b>Post:</b>The information of the waste was stored in a message.<br>
+	@return Message with the information of the waste.<br>
+	*/
 	@Override
 	public String toString ()
 	{
@@ -30,6 +34,10 @@ public class RecyclableWaste extends Waste
 		return information;
 	}
 
+	/**Transforms the type value to its String equivalent.<br>
+	<b>Post:</b>The String equivalent of type was stored as String.<br>
+	@return Message with the String equivalent of type.<br>
+	*/
 	public String typeIntToString ()
 	{
 		String typeString;
@@ -74,6 +82,10 @@ public class RecyclableWaste extends Waste
 		return typeString;
 	}
 
+	/**Changes an empty description of disposure to "No description".<br>
+	<b>Post:</b>The changes was made or not.<br>
+	@return Message with the correct description.<br>
+	*/
 	public String throwAwayDescForToString ()
 	{
 		String newThrowAwayDesc = "";
@@ -91,6 +103,10 @@ public class RecyclableWaste extends Waste
 		return newThrowAwayDesc;
 	}
 
+	/**Calculates the nocivity of the waste.<br>
+	*<b>Post:</b>The nocivity was calculated.<br>
+	*@return The result of the calculation.<br>
+	*/
 	@Override
 	public double calculateNocivity ()
 	{
@@ -101,6 +117,10 @@ public class RecyclableWaste extends Waste
 		return nocivity;
 	}
 
+	/**Determines the usability of the waste.<br>
+	*<b>Post:</b>The usability of the waste is determined.<br>
+	*@return Boolean determining the waste's usability.<br>
+	*/
 	@Override
 	public boolean determineUsability ()
 	{

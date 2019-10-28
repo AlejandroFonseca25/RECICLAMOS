@@ -16,6 +16,10 @@ public class BiodegradableWaste extends Waste
 		this.canCompost = canCompost;
 	}
 
+	/**Stores the information of the waste in a message.<br>
+	<b>Post:</b>The information of the waste was stored in a message.<br>
+	@return Message with the information of the waste.<br>
+	*/
 	@Override
 	public String toString ()
 	{
@@ -34,6 +38,10 @@ public class BiodegradableWaste extends Waste
 		return information;
 	}
 
+	/**Calculates the nocivity of the waste.<br>
+	*<b>Post:</b>The nocivity was calculated.<br>
+	*@return The result of the calculation.<br>
+	*/
 	@Override
 	public double calculateNocivity ()
 	{
@@ -52,6 +60,10 @@ public class BiodegradableWaste extends Waste
 		return nocivity;
 	}
 
+	/**Determines the usability of the waste.<br>
+	*<b>Post:</b>The usability of the waste is determined.<br>
+	*@return Boolean determining the waste's usability.<br>
+	*/
 	@Override
 	public boolean determineUsability ()
 	{

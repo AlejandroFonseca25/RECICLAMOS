@@ -30,6 +30,10 @@ public abstract class Waste
 		this.producerProduct = producerProduct;
 	}
 
+	/**Calculates the nocivity of the waste.<br>
+	*<b>Post:</b>The nocivity was calculated.<br>
+	*@return The result of the calculation.<br>
+	*/
 	public double calculateNocivity ()
 	{
 		double nocivity = 0; 
@@ -60,6 +64,10 @@ public abstract class Waste
 		return nocivity;
 	}
 
+	/**Determines the usability of the waste.<br>
+	*<b>Post:</b>The usability of the waste is determined.<br>
+	*@return Boolean determining the waste's usability.<br>
+	*/
 	public abstract boolean determineUsability ();
 
 	////////////////////////////////////////
@@ -100,12 +108,20 @@ public abstract class Waste
 		this.producerProduct = producerProduct;
 	}
 
+	/**Stores the information of the waste in a message.<br>
+	<b>Post:</b>The information of the waste was stored in a message.<br>
+	@return Message with the information of the waste.<br>
+	*/
 	public String toString ()
 	{
 		String toString = "Name: " + name + "." + "\nIdentifier: " + identifier + ".\nOrigin: " + originIntToString() + "\nColor: " + color + ".\nDecomposition time: " + decompositionTime + " days.";
 		return toString;
 	}
 
+	/**Transforms the origin value to its String equivalent.<br>
+	<b>Post:</b>The String equivalent of origin was stored as String.<br>
+	@return Message with the String equivalent of origin.<br>
+	*/
 	public String originIntToString ()
 	{
 		String originString;

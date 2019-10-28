@@ -19,6 +19,10 @@ public class ProducerProduct
 		this.description = description;
 	}
 
+	/**Stores the information of the product in a message.<br>
+	<b>Post:</b>The information of the product was stored in a message.<br>
+	@return Message with the information of the product.<br>
+	*/
 	public String toString ()
 	{
 		String toString = "\nName: " + name + ".\nIdentifier: " + identifier + ".\nDescription: " + description + ".";
